@@ -42,7 +42,7 @@ And here. | Okay. | I think we get it.
 - Even if you use dashes or asterisks.
 * And last but not least, let's not forget embedded images:
 
-![React Logo w/ Text](https://goo.gl/Umyytc)
+![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
 `;
 
 export default defaultMarkdown;

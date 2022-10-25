@@ -13,8 +13,6 @@ class App extends React.Component {
       value: defaultMarkdown
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   handleChange(event) {
@@ -22,13 +20,8 @@ class App extends React.Component {
     this.setState({ value: clean });
   }
 
-  handleSubmit(event) {
-    alert('An essay was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
   getMarkdownText() {
-    var rawMarkup = marked(this.state.value);
+    let rawMarkup = marked(this.state.value);
     return { __html: rawMarkup };
   }
 
