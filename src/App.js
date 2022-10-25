@@ -1,11 +1,10 @@
 import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMaximize, faFire } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked'
 import defaultMarkdown from './utils/defaultMarkdown';
 import Editor from './components/Editor';
+import Previewer from './components/Previewer';
 
 class App extends React.Component {
   constructor(props) {
@@ -36,18 +35,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <Editor value={this.state.value} handleChange={this.handleChange}/>
+        <Editor value={this.state.value} handleChange={this.handleChange} />
 
-        <div className='preview-container'>
-          <div className='preview-header'>
-            <p><FontAwesomeIcon icon={faFire} /> Preview</p>
-            <p><FontAwesomeIcon icon={faMaximize} /></p>
-          </div>
-          <div id='preview'
-            dangerouslySetInnerHTML={this.getMarkdownText()}>
-
-          </div>
-        </div>
+        <Previewer getMarkdownText={this.getMarkdownText()} />
       </div>
     );
   }
