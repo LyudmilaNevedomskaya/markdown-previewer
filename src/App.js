@@ -2,8 +2,8 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMaximize, faFire } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-
-import {marked} from 'marked'
+import DOMPurify from 'dompurify';
+import { marked } from 'marked'
 const defaultMarkdown = `# Welcome to my React Markdown Previewer!
 
 ## This is a sub-heading...
@@ -57,24 +57,25 @@ class App extends React.Component {
     this.state = {
       value: defaultMarkdown
     };
-  this.handleChange = this.handleChange.bind(this);
-  this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
-}
+  }
 
-handleChange(event) {
-  this.setState({value: event.target.value});
-}
+  handleChange(event) {
+    let clean = DOMPurify.sanitize(event.target.value)
+    this.setState({ value: clean });
+  }
 
-handleSubmit(event) {
-  alert('An essay was submitted: ' + this.state.value);
-  event.preventDefault();
-}
+  handleSubmit(event) {
+    alert('An essay was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
 
-getMarkdownText() {
-  var rawMarkup = marked(this.state.value, {sanitize: true});
-  return { __html: rawMarkup };
-}
+  getMarkdownText() {
+    var rawMarkup = marked(this.state.value);
+    return { __html: rawMarkup };
+  }
 
   render() {
     return (
