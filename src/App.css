@@ -37,9 +37,20 @@ td, th {
   border: 2px solid black;
   padding: 10px;
 }
+textarea {
+  width: 100%;
+  max-width: 100%;
+  height: max-content;
+}
+.resize {
+  cursor: pointer;
+}
 .editor-container, .preview-container {
   border: 1px solid black;
   box-shadow: 2px 5px 18px 4px #111111;
+}
+.editor-container {
+  width: 100%;
 }
 .editor-header, .preview-header {
   display: flex;
@@ -60,4 +71,10 @@ td, th {
 }
 #preview {
   min-height: 100px;
+}
+
+@media all and (max-width: 800px) {
+  .container {
+    width: 90%;
+  }
 }

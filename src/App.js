@@ -18,7 +18,8 @@ marked.parse(
 
 const App = () => {
 
-  const [content, setContent] = React.useState(defaultMarkdown)
+  const [content, setContent] = React.useState(defaultMarkdown);
+  const [textareaHeight, setTextareaHeight] = React.useState({ height: '250px' });
 
   const handleChange = (event) => {
     let clean = DOMPurify.sanitize(event.target.value);
@@ -26,11 +27,26 @@ const App = () => {
     setContent(clean);
   }
 
+  const resizeTextarea = (e) => {
+    const areaHeight = document.getElementById('editor').scrollHeight + 'px';
+    if (textareaHeight.height !== areaHeight) {
+      setTextareaHeight({ height: areaHeight })
+    } else {
+      setTextareaHeight({ height: '250px' })
+    }
+  }
+
   return (
     <div className="container">
-      <Editor value={content} handleChange={handleChange} />
-      <Previewer dangerouslySetInnerHTML={{ __html: marked(content, { renderer: markdownRenderer }) }} />
+      <Editor
+        style={textareaHeight}
+        value={content}
+        handleChange={handleChange}
+        onClick={resizeTextarea} />
+      <Previewer
+        dangerouslySetInnerHTML={{ __html: marked(content, { renderer: markdownRenderer }) }} />
     </div>
   );
 }
 export default App;
+

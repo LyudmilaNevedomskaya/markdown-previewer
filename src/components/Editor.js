@@ -8,13 +8,17 @@ export default function Editor(props) {
     <div className='editor-container'>
       <div className='editor-header'>
         <p><FontAwesomeIcon icon={faFire} /> Editor</p>
-        <p><FontAwesomeIcon icon={faMaximize} /></p>
+        <p><FontAwesomeIcon
+          className='resize'
+          onClick={props.onClick}
+          icon={faMaximize} /></p>
       </div>
       <textarea id='editor'
+        style={props.style}
         value={props.value}
         onChange={props.handleChange}
         placeholder="Enter Your Markdown Here..."
-        rows="10" cols="60">
+      >
       </textarea>
     </div>
   )
