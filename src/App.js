@@ -20,6 +20,7 @@ const App = () => {
 
   const [content, setContent] = React.useState(defaultMarkdown);
   const [textareaHeight, setTextareaHeight] = React.useState({ height: '250px' });
+  const [previewHeight, setPreviewHeight] = React.useState({})
 
   const handleChange = (event) => {
     let clean = DOMPurify.sanitize(event.target.value);
@@ -36,15 +37,28 @@ const App = () => {
     }
   }
 
+  const resizePreview = () => {
+    const previewContainer = document.getElementById('preview');
+    if (!previewHeight.height) {
+      setPreviewHeight({ height: '250px', overflowY: 'scroll' })
+    } else {
+      setPreviewHeight({})
+    }
+  }
+
   return (
     <div className="container">
       <Editor
         style={textareaHeight}
         value={content}
         handleChange={handleChange}
-        onClick={resizeTextarea} />
+        onClick={resizeTextarea}
+      />
       <Previewer
-        dangerouslySetInnerHTML={{ __html: marked(content, { renderer: markdownRenderer }) }} />
+        style={previewHeight}
+        onClick={resizePreview}
+        dangerouslySetInnerHTML={{ __html: marked(content, { renderer: markdownRenderer }) }}
+      />
     </div>
   );
 }
