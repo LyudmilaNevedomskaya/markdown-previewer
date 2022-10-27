@@ -1,4 +1,5 @@
-const defaultMarkdown = `# Welcome to my React Markdown Previewer!
+const defaultMarkdown = `
+# Welcome to my React Markdown Previewer!
 
 ## This is a sub-heading...
 ### And here's some other cool stuff:
@@ -9,7 +10,7 @@ Heres some code, \`<div></div>\`, between 2 backticks.
 // this is multi-line code:
 
 function anotherExample(firstLine, lastLine) {
-  if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
+  if (firstLine == '\`\`\`' lastLine == '\`\`\`') {
     return multiLineCode;
   }
 }
@@ -20,7 +21,7 @@ Or _italic_.
 Or... wait for it... **_both!_**
 And feel free to go crazy ~~crossing stuff out~~.
 
-There's also [links](https://www.freecodecamp.com), and
+There's also [links](https://www.freecodecamp.com)
 > Block Quotes!
 
 And if you want to get really crazy, even tables:

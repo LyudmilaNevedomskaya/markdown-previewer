@@ -11,7 +11,7 @@ export default function Previewer(props) {
             <p><FontAwesomeIcon icon={faMaximize} /></p>
           </div>
           <div id='preview'
-            dangerouslySetInnerHTML={props.getMarkdownText}>
+            dangerouslySetInnerHTML={props.dangerouslySetInnerHTML}>
           </div>
         </div>
   )

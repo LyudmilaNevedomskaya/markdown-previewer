@@ -1,39 +1,36 @@
 import './App.css';
 import React from 'react';
-import DOMPurify from 'dompurify';
-import { marked } from 'marked'
-import defaultMarkdown from './utils/defaultMarkdown';
 import Editor from './components/Editor';
 import Previewer from './components/Previewer';
+import { marked } from 'marked'
+import DOMPurify from 'dompurify';
+import defaultMarkdown from './utils/defaultMarkdown';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: defaultMarkdown
-    };
-    this.handleChange = this.handleChange.bind(this);
+const markdownRenderer = new marked.Renderer();
+markdownRenderer.link = function (href, title, text) {
+  return `<a target='_blank' href="${href}">${text}</a>`;
+};
+marked.setOptions({ breaks: true });
+// remove the most common zerowidth characters from the start of the file 
+marked.parse(
+  defaultMarkdown.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, "")
+);
+
+const App = () => {
+
+  const [content, setContent] = React.useState(defaultMarkdown)
+
+  const handleChange = (event) => {
+    let clean = DOMPurify.sanitize(event.target.value);
+    clean = clean.replace(/&gt;+/g, '>');
+    setContent(clean);
   }
 
-  handleChange(event) {
-    let clean = DOMPurify.sanitize(event.target.value)
-    this.setState({ value: clean });
-  }
-
-  getMarkdownText() {
-    let rawMarkup = marked(this.state.value);
-    return { __html: rawMarkup };
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <Editor value={this.state.value} handleChange={this.handleChange} />
-
-        <Previewer getMarkdownText={this.getMarkdownText()} />
-      </div>
-    );
-  }
+  return (
+    <div className="container">
+      <Editor value={content} handleChange={handleChange} />
+      <Previewer dangerouslySetInnerHTML={{ __html: marked(content, { renderer: markdownRenderer }) }} />
+    </div>
+  );
 }
-
 export default App;

@@ -12,6 +12,14 @@ p {
 img {
   max-width: 250px;
 }
+code {
+  background-color: white;
+}
+pre {
+  background-color: white;
+  width: fit-content;
+  padding: 15px;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -20,6 +28,14 @@ img {
   margin: auto;
   margin-top: 50px;
   width: 70%;
+}
+table {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+td, th {
+  border: 2px solid black;
+  padding: 10px;
 }
 .editor-container, .preview-container {
   border: 1px solid black;
