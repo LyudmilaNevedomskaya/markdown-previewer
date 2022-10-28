@@ -38,7 +38,6 @@ const App = () => {
   }
 
   const resizePreview = () => {
-    const previewContainer = document.getElementById('preview');
     if (!previewHeight.height) {
       setPreviewHeight({ height: '250px', overflowY: 'scroll' })
     } else {
